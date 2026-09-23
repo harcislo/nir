@@ -76,6 +76,26 @@
 .rowActions {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
+.actionButton,
+.actionButtonWrapper {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  flex: 0 0 32px;
+}
+
+.actionButton {
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.actionButtonWrapper {
+  display: inline-flex;
 }
 
 @media (max-width: 599px) {

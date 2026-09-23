@@ -37,6 +37,7 @@ import { MeasurementDrawer } from "../features/measurements/MeasurementDrawer";
 import { ApiError } from "../shared/api/client";
 import { deleteMeasurement, downloadMeasurementFile, listMeasurements } from "../shared/api/measurements";
 import type { Measurement, MeasurementFilters, PanelState } from "../types";
+import styles from "./MeasurementsPage.module.css";
 
 type Notice = { message: string; severity: "success" | "warning" | "error" } | null;
 
@@ -99,11 +100,11 @@ export function MeasurementsPage() {
     {
       field: "actions", headerName: "Действия", width: 185, sortable: false, filterable: false,
       renderCell: ({ row }) => (
-        <Stack direction="row" onClick={(event) => event.stopPropagation()}>
-          <Tooltip title="Просмотр"><IconButton size="small" onClick={() => setPanel({ mode: "view", measurementId: row.id })}><VisibilityOutlinedIcon fontSize="small" /></IconButton></Tooltip>
-          <Tooltip title="Изменить"><IconButton size="small" onClick={() => setPanel({ mode: "edit", measurementId: row.id })}><EditOutlinedIcon fontSize="small" /></IconButton></Tooltip>
-          <Tooltip title={row.file ? "Скачать файл" : "Файл не прикреплён"}><span><IconButton size="small" disabled={!row.file} onClick={() => void download(row)}><DownloadOutlinedIcon fontSize="small" /></IconButton></span></Tooltip>
-          <Tooltip title="Удалить"><IconButton size="small" color="error" onClick={() => setDeleteTarget(row)}><DeleteOutlineIcon fontSize="small" /></IconButton></Tooltip>
+        <Stack direction="row" className={styles.rowActions} onClick={(event) => event.stopPropagation()}>
+          <Tooltip title="Просмотр"><IconButton className={styles.actionButton} size="small" onClick={() => setPanel({ mode: "view", measurementId: row.id })}><VisibilityOutlinedIcon fontSize="small" /></IconButton></Tooltip>
+          <Tooltip title="Изменить"><IconButton className={styles.actionButton} size="small" onClick={() => setPanel({ mode: "edit", measurementId: row.id })}><EditOutlinedIcon fontSize="small" /></IconButton></Tooltip>
+          <Tooltip title={row.file ? "Скачать файл" : "Файл не прикреплён"}><span className={styles.actionButtonWrapper}><IconButton className={styles.actionButton} size="small" disabled={!row.file} onClick={() => void download(row)}><DownloadOutlinedIcon fontSize="small" /></IconButton></span></Tooltip>
+          <Tooltip title="Удалить"><IconButton className={styles.actionButton} size="small" color="error" onClick={() => setDeleteTarget(row)}><DeleteOutlineIcon fontSize="small" /></IconButton></Tooltip>
         </Stack>
       ),
     },
