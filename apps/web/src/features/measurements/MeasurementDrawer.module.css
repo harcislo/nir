@@ -1,0 +1,178 @@
+.drawerPaper {
+  width: 760px;
+  max-width: 100%;
+}
+
+.drawerLayout,
+.view,
+.form {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.loading {
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.loadError {
+  margin: 24px;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 24px;
+}
+
+.detailGrid,
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detailGrid {
+  gap: 24px;
+}
+
+.formGrid {
+  gap: 16px;
+}
+
+.detailLabel {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.sectionTitle.sectionTitle {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.dateTimeField :global(.MuiInputBase-root) {
+  height: 40px;
+}
+
+.fileCard {
+  padding: 16px;
+}
+
+.existingFileCard {
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.fileRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.existingFileRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.fileInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.fileName {
+  overflow: hidden;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px;
+}
+
+.formFooter {
+  justify-content: flex-end;
+}
+
+.checkRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.formError {
+  margin-bottom: 16px;
+}
+
+.fileFeedback {
+  margin-bottom: 12px;
+}
+
+.dropZone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px dashed #8aaeb7;
+  border-radius: 10px;
+  background-color: #f8fbfc;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.dropZoneActive {
+  border-color: #0f6073;
+  background-color: #eaf4f6;
+  box-shadow: 0 0 0 2px rgba(15, 96, 115, 0.12);
+}
+
+.dropPrompt.dropPrompt {
+  font-weight: 600;
+}
+
+.fileHint.fileHint {
+  display: block;
+  margin-top: 4px;
+}
+
+@media (max-width: 899px) {
+  .drawerPaper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 599px) {
+  .drawerHeader,
+  .content {
+    padding: 16px;
+  }
+
+  .detailGrid,
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fileRow,
+  .existingFileRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,94 @@
+.page {
+  min-height: 100vh;
+}
+
+.appBar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.toolbar {
+  gap: 16px;
+}
+
+.brandAvatar {
+  width: 38px;
+  height: 38px;
+  background-color: #0f6073;
+}
+
+.brand {
+  flex: 1;
+}
+
+.brandTitle {
+  line-height: 1.15;
+}
+
+.container {
+  width: 100%;
+  padding: 24px;
+}
+
+.headingRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  margin-top: 4px;
+}
+
+.tableCard {
+  height: 570px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.tableError {
+  margin: 16px;
+}
+
+.dataGrid {
+  border: 0;
+}
+
+.dataGrid :global(.MuiDataGrid-columnHeaders) {
+  background-color: #eef4f6;
+}
+
+.dataGrid :global(.MuiDataGrid-columnHeaderTitle) {
+  font-weight: 700;
+}
+
+.dataGrid :global(.MuiDataGrid-row) {
+  cursor: pointer;
+}
+
+.dataGrid :global(.MuiDataGrid-cell:focus),
+.dataGrid :global(.MuiDataGrid-columnHeader:focus) {
+  outline: none;
+}
+
+.rowActions {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 599px) {
+  .userLogin {
+    display: none;
+  }
+
+  .container {
+    padding: 24px 16px;
+  }
+
+  .headingRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
