@@ -111,10 +111,7 @@ export function MeasurementDrawer({ state, onClose, onModeChange, onDelete, noti
       >
         <div className={styles.drawerLayout}>
           <div className={styles.drawerHeader}>
-            <div>
-              <Typography variant="h5">{title}</Typography>
-              {measurement && <Typography variant="body2" color="text.secondary">{measurement.sampleNumber}</Typography>}
-            </div>
+            <Typography variant="h5">{title}</Typography>
             <IconButton aria-label="Закрыть" onClick={requestClose}><CloseIcon /></IconButton>
           </div>
           <Divider />
