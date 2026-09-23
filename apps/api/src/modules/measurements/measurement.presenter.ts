@@ -1,5 +1,14 @@
 import type { MeasurementRow } from "./measurement.repository.js";
 
+function presentDateOnly(value: string | Date) {
+  if (typeof value === "string") return value.slice(0, 10);
+
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, "0");
+  const day = String(value.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export function presentMeasurement(row: MeasurementRow) {
   return {
     id: row.id,
@@ -10,7 +19,7 @@ export function presentMeasurement(row: MeasurementRow) {
     mode1: row.mode1,
     mode2: row.mode2,
     mode3: row.mode3,
-    measurementDate: row.measurement_date,
+    measurementDate: presentDateOnly(row.measurement_date),
     measurementTime: row.measurement_time,
     isReference: row.is_reference,
     isRepair: row.is_repair,
@@ -25,4 +34,3 @@ export function presentMeasurement(row: MeasurementRow) {
     updatedAt: row.updated_at,
   };
 }
-

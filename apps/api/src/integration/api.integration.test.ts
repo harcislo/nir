@@ -92,6 +92,7 @@ databaseDescribe("API with PostgreSQL", () => {
 
     expect(response.status).toBe(201);
     expect(response.body.data.sampleNumber).toBe(sampleNumber);
+    expect(response.body.data.measurementDate).toBe("2026-09-21");
     expect(response.body.data.file).toBeNull();
     measurementId = response.body.data.id;
   });

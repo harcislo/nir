@@ -15,7 +15,7 @@ export interface MeasurementRow extends QueryResultRow {
   mode1: string | null;
   mode2: string | null;
   mode3: string | null;
-  measurement_date: string;
+  measurement_date: string | Date;
   measurement_time: string | null;
   is_reference: boolean;
   is_repair: boolean;
