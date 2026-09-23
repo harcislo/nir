@@ -15,6 +15,12 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      # Unit tests only validate application behavior and do not connect to this
+      # database unless RUN_DB_TESTS=true. A value is still required when the
+      # API configuration module is imported.
+      DATABASE_URL: postgres://measurement:measurement@127.0.0.1:5432/measurement_portal_test
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
