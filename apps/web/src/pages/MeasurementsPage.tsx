@@ -128,7 +128,7 @@ export function MeasurementsPage() {
 
       <Container maxWidth={false} sx={{ py: 3, px: { xs: 2, md: 3 } }}>
         <Stack direction={{ xs: "column", sm: "row" }} sx={{ justifyContent: "space-between", alignItems: { sm: "center" }, gap: 2, mb: 3 }}>
-          <Box><Typography variant="h4">Измерения</Typography><Typography color="text.secondary" sx={{ mt: 0.5 }}>Хранение результатов и связанных файлов</Typography></Box>
+          <Typography variant="h4">Измерения</Typography>
           <Button variant="contained" size="large" startIcon={<AddIcon />} onClick={() => setPanel({ mode: "create" })}>Добавить запись</Button>
         </Stack>
 
