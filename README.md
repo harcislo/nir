@@ -159,6 +159,80 @@ docker compose ps
 `http://localhost:4000/api/docs/`. В production-сборке React-интерфейс раздаётся
 тем же Express-сервером, поэтому отдельный веб-сервер не требуется.
 
+## Production-развёртывание
+
+Для production используется отдельный `compose.prod.yaml`:
+
+- PostgreSQL доступен только во внутренней Docker-сети;
+- API доступен только reverse proxy;
+- Caddy публикует порты `80/443`, автоматически получает TLS-сертификат и
+  перенаправляет HTTP на HTTPS;
+- миграции применяются при запуске API;
+- состояние PostgreSQL и сертификаты Caddy хранятся в Docker volumes.
+
+На сервере скопируйте шаблон переменных и заполните его:
+
+```bash
+cp deploy/production.env.example .env
+nano .env
+```
+
+Значение `DOMAIN` указывается без протокола, например `lablog.example.ru`.
+Для `POSTGRES_PASSWORD` используйте длинный URL-safe пароль из букв и цифр,
+поскольку он включается в строку подключения PostgreSQL. Файл `.env` нельзя
+добавлять в Git.
+
+Перед запуском DNS-запись домена должна указывать на сервер, а входящие порты
+`80` и `443` должны быть открыты. Запуск:
+
+```bash
+docker compose -f compose.prod.yaml config --quiet
+docker compose -f compose.prod.yaml up -d --build
+docker compose -f compose.prod.yaml ps
+```
+
+Проверка после запуска:
+
+```bash
+curl https://ВАШ-ДОМЕН/health/ready
+```
+
+Создание или смена пароля администратора без сохранения пароля в истории shell:
+
+```bash
+read -rsp "Новый пароль администратора: " ADMIN_PASSWORD
+echo
+docker compose -f compose.prod.yaml exec \
+  -e ADMIN_LOGIN=admin \
+  -e ADMIN_PASSWORD="$ADMIN_PASSWORD" \
+  api npm run admin:create:prod --workspace @measurement-portal/api
+unset ADMIN_PASSWORD
+```
+
+### Автоматический deploy из GitHub
+
+Workflow `.github/workflows/deploy.yml` при каждом push в `main` выполняет
+typecheck, unit-тесты и production-сборку. Сам deploy изначально отключён, чтобы
+push не завершался ошибкой до появления сервера.
+
+После первого ручного развёртывания добавьте в GitHub repository secrets:
+
+- `DEPLOY_HOST` — IP или домен сервера;
+- `DEPLOY_USER` — пользователь Linux для deploy;
+- `DEPLOY_SSH_KEY` — приватный ключ, разрешённый на сервере;
+- `DEPLOY_KNOWN_HOSTS` — проверенная строка `known_hosts` сервера.
+
+Добавьте repository variables:
+
+- `DEPLOY_ENABLED=true` — включает автоматический deploy;
+- `DEPLOY_PATH=/opt/lablog` — каталог репозитория на сервере;
+- `DEPLOY_PORT=22` — SSH-порт сервера.
+
+Production `.env` остаётся только на сервере и не передаётся через GitHub Actions.
+При включённом deploy workflow подключается к серверу и запускает
+`scripts/deploy-production.sh`, который обновляет `main`, пересобирает контейнеры
+и ожидает успешный `/health/ready`.
+
 ## Резервное копирование PostgreSQL
 
 ```bash

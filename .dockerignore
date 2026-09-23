@@ -8,4 +8,9 @@ dist
 coverage
 backups
 *.log
-
+.github
+deploy
+scripts
+Caddyfile
+compose*.yaml
+README.md
